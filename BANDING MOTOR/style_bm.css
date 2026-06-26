@@ -1,0 +1,257 @@
+/* Aturan dasar reset & dimensi utama sesuai properti Figma Anda */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: #F8F9FA;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* CONTAINER UTAMA (Menyesuaikan spesifikasi auto-layout Anda) */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+
+    position: relative;
+    width: 100%;             /* UTAMA: Diubah dari 1143px menjadi 100% agar full layar */
+    min-height: 100vh;       /* Menyesuaikan tinggi minimal agar penuh ke bawah */
+    background: #FFFFFF;
+    overflow-x: hidden;
+}
+
+/* NAVBAR STYLE */
+.navbar {
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    border-bottom: 1px solid #E5E7EB;
+    background: #FFFFFF;
+    box-sizing: border-box;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    font-weight: 800;
+    font-size: 24px;
+}
+
+.logo-text {
+    color: #E30613; /* Merah khas Suzuki */
+    font-style: italic;
+    margin-right: 5px;
+}
+
+.brand-name {
+    color: #003399; /* Biru khas Suzuki */
+    letter-spacing: 1px;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-item {
+    text-decoration: none;
+    color: #333333;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.nav-item.active {
+    background-color: #003399;
+    color: #FFFFFF;
+}
+
+/* CONTENT CONTAINER */
+.content-wrapper {
+    width: 100%;
+    padding: 60px 10%;;
+    box-sizing: border-box;
+    flex: 1;
+}
+
+.selection-grid {
+    display: flex;
+    gap: 30px;
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.page-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #111111;
+    margin-bottom: 8px;
+}
+
+.page-subtitle {
+    font-size: 14px;
+    color: #666666;
+    margin-bottom: 30px;
+}
+
+/* SELECTION BOXES */
+.selection-grid {
+    display: flex;
+    gap: 24px;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.motor-card {
+    flex: 1;
+    background: #FFFFFF;
+    border: 1px solid #003399;
+    border-radius: 12px;
+    padding: 30px;
+    box-sizing:border-box;
+}
+
+.card-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #111111;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.card-instruction {
+    font-size: 14px;
+    color: #003399;
+    margin-bottom: 20px;
+}
+
+.custom-select select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #E5E7EB;
+    border-radius: 6px;
+    background-color: #F3F4F6;
+    font-size: 14px;
+    color: #666666;
+    outline: none;
+    cursor: pointer;
+    appearance: none; /* Menghilangkan panah bawaan browser */
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2003399' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 16px;
+}
+
+/* EMPTY STATE BLUE BANNER */
+.empty-state-banner {
+    width: 100%;
+    background-color: #003399;
+    border-radius: 12px;
+    padding: 60px 40px;
+    text-align: center;
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    min-height: 250px;       /* Sedikit ditinggikan agar lebih proporsional di layar lebar */
+    box-sizing: border-box;
+}
+
+.close-icon {
+    font-size: 32px;
+    font-weight: 300;
+    cursor: pointer;
+}
+
+.banner-text {
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+}
+
+/* FOOTER STYLING */
+.footer {
+    width: 100%;
+    background-color: #FFFFFF;
+    border-top: 1px solid #E5E7EB;
+    padding: 40px 40px 20px 40px;
+}
+
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-brand-col {
+    flex: 2;
+}
+
+.footer-logo {
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+.logo-text.red { color: #E30613; font-style: italic; }
+.brand-name.blue { color: #003399; }
+
+.footer-desc {
+    font-size: 13px;
+    color: #003399;
+    line-height: 1.5;
+    max-width: 250px;
+}
+
+.footer-links-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-links-col h4 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #003399;
+    margin-bottom: 6px;
+}
+
+.footer-links-col a {
+    text-decoration: none;
+    font-size: 13px;
+    color: #003399;
+    transition: color 0.2s ease;
+}
+
+.footer-links-col a:hover {
+    color: #E30613;
+}
+
+.footer-bottom {
+    border-top: 1px solid #E5E7EB;
+    padding-top: 20px;
+    text-align: center;
+}
+
+.footer-bottom p {
+    font-size: 12px;
+    color: #003399;
+}

@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Suzuki Detail Motor</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, system-ui, -apple-system, sans-serif;
+      background: #f7f8fa;
+      color: #030213;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .detail-card {
+      width: 100%;
+      max-width: 440px;
+      background: #ffffff;
+      border-radius: 32px;
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.08);
+      padding: 32px;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    .close-button {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      background: none;
+      border: none;
+      font-size: 22px;
+      cursor: pointer;
+      color: #bcccda;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .close-button:hover { color: #717182; }
+
+    .motor-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #030213;
+      margin: 0 0 4px 0;
+    }
+
+    .visual-box {
+      width: 100%;
+      height: 200px;
+      background: #f4f5f8;
+      border-radius: 24px;
+      margin: 20px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .visual-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain; 
+      padding: 0; 
+      box-sizing: border-box;
+      transform: scale(1.1); 
+      transition: opacity 0.2s ease;
+    }
+
+    .meta-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .price-label {
+      font-size: 12px;
+      color: #717182;
+      margin-bottom: 4px;
+    }
+
+    .price-main {
+      font-size: 24px;
+      font-weight: 700;
+      color: #003399;
+    }
+
+    .color-selection {
+      text-align: right;
+    }
+
+    .color-label {
+      font-size: 12px;
+      color: #717182;
+      margin-bottom: 6px;
+    }
+
+    .color-picker {
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    .color-dot {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid #ffffff;
+      box-shadow: 0 0 0 1px #bcccda;
+      cursor: pointer;
+      padding: 0;
+      transition: all 0.2s ease;
+    }
+
+    .color-dot:hover {
+      transform: scale(1.1);
+    }
+
+    .color-dot.active {
+      box-shadow: 0 0 0 2px #003399;
+    }
+
+    .section-headline {
+      font-size: 14px;
+      font-weight: 700;
+      color: #030213;
+      margin: 0 0 12px 0;
+      border-left: 3px solid #003399;
+      padding-left: 8px;
+    }
+
+    .spec-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .spec-item {
+      border: 1px solid #eef0f5;
+      border-radius: 14px;
+      padding: 12px 14px;
+    }
+
+    .spec-title {
+      font-size: 11px;
+      color: #717182;
+      margin-bottom: 4px;
+    }
+
+    .spec-data {
+      font-size: 13px;
+      font-weight: 700;
+      color: #030213;
+    }
+
+    .features-list {
+      margin: 0 0 28px 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .features-list li {
+      font-size: 13px;
+      color: #333333;
+      position: relative;
+      padding-left: 18px;
+      line-height: 1.5;
+    }
+
+    .features-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #003399;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 1;
+    }
+
+    .action-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .action-btn {
+      min-height: 48px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-sizing: border-box;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-main {
+      background: #003399;
+      color: #ffffff;
+      border: none;
+    }
+    .btn-main:hover { background: #002266; }
+
+    .btn-sub {
+      background: #ffffff;
+      color: #003399;
+      border: 1px solid #003399;
+    }
+    .btn-sub:hover { background: #eef2ff; }
+  </style>
+</head>
+<body>
+
+  <div class="detail-card">
+    <a href="katalog.html" id="closeBtn" class="close-button">✕</a>
+    
+    <h1 id="motorTitle" class="motor-title">Memuat Data...</h1>
+    
+    <div class="visual-box">
+      <img id="motorImg" src="" alt="Suzuki" />
+    </div>
+
+    <div class="meta-container">
+      <div>
+        <div class="price-label">Harga OTR Jawa Timur</div>
+        <div id="motorPrice" class="price-main">Rp 0</div>
+      </div>
+      
+      <div class="color-selection">
+        <div class="color-label">Pilihan Warna</div>
+        <div class="color-picker" id="colorPicker"></div>
+      </div>
+    </div>
+
+    <h2 class="section-headline">Spesifikasi</h2>
+    <div class="spec-grid">
+      <div class="spec-item">
+        <div class="spec-title">Mesin</div>
+        <div id="specMesin" class="spec-data">-</div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-title">Transmisi</div>
+        <div id="specTransmisi" class="spec-data">-</div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-title">Konsumsi BBM</div>
+        <div id="specBBM" class="spec-data">-</div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-title">Berat</div>
+        <div id="specBerat" class="spec-data">-</div>
+      </div>
+    </div>
+
+    <h2 class="section-headline">Keunggulan</h2>
+    <ul class="features-list" id="featuresList">
+      <li>Memuat data keunggulan...</li>
+    </ul>
+ 
+    <div class="action-group">
+      <a id="btnLebihLengkap" href="#" target="_blank" class="action-btn btn-sub">▶ Lebih Lengkap</a>
+      
+      <button class="action-btn btn-main" onclick="bukaKalkulator()">
+        <img src="Iconkal.svg" alt="Icon Kredit" style="width: 18px; height: 18px; object-fit: contain; margin-right: 6px;">
+        Hitung Kredit
+      </button>
+    </div>
+  </div> <script>
+    // Ambil ID dan asal halaman dari URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const motorId = urlParams.get('id');
+    const asalHalaman = urlParams.get('from'); 
+
+    // --- LOGIKA DINAMIS TOMBOL CLOSE ---
+    const closeBtn = document.getElementById('closeBtn');
+    if (asalHalaman === 'beranda') {
+      closeBtn.href = "../BERANDA/index_beranda.html";
+    } else {
+      closeBtn.href = "katalog.html";
+    }
+
+    // --- FUNGSI PINDAH KE KALKULATOR KREDIT SECARA DINAMIS ---
+function bukaKalkulator() {
+  if (motorId) {
+    // 1. Ambil teks judul motor dari halaman (misal: "Suzuki Burgman Street 125Ex")
+    const namaMotorLengkap = document.getElementById('motorTitle').textContent;
+    
+    // 2. Siapkan variabel untuk menampung nama file target
+    let namaFileTarget = "";
+    
+    // 3. Deteksi tipe motor secara dinamis berdasarkan judulnya
+    if (namaMotorLengkap.toLowerCase().includes("burgman")) {
+      namaFileTarget = "index_hk Burgman.html";
+    } else if (namaMotorLengkap.toLowerCase().includes("access")) {
+      namaFileTarget = "index_hk Access.html";
+    } else if (namaMotorLengkap.toLowerCase().includes("address")) {
+      namaFileTarget = "index_hk Address fi.html";
+    } else if (namaMotorLengkap.toLowerCase().includes("gsx-r")) {
+      namaFileTarget = "index_hk GSX-R.html";
+    } else if (namaMotorLengkap.toLowerCase().includes("gsx-s")) {
+      namaFileTarget = "index_hk GSX-S.html";
+    } else if (namaMotorLengkap.toLowerCase().includes("elegant")) {
+      namaFileTarget = "index_hk next elegant.html";
+    } else if (namaMotorLengkap.toLowerCase().includes("crossover")) {
+      namaFileTarget = "index_hk Nextcrossover.html";
+    } else if (namaMotorLengkap.toLowerCase().includes("satria")) {
+      namaFileTarget = "index_hk Satria Pro.html";
+    } else if (namaMotorLengkap.toLowerCase().includes("vstrom") || namaMotorLengkap.toLowerCase().includes("v-strom")) {
+      namaFileTarget = "index_HK Vstrom.html";
+    } else {
+      // Jika tidak ada yang cocok, gunakan file default (silakan sesuaikan jika perlu)
+      namaFileTarget = "index_hk Burgman.html";
+    }
+
+    // 4. Bungkus nama folder dan nama file dengan encodeURIComponent agar spasi diubah menjadi %20 secara aman
+    const folderKalkulator = encodeURIComponent("HASIL KALKULATOR"); 
+    const namaFileEscaped = encodeURIComponent(namaFileTarget);
+    
+    // 5. Eksekusi pengalihan halaman menuju berkas tujuan
+    window.location.href = `../${folderKalkulator}/${namaFileEscaped}?id=${motorId}&from=${asalHalaman || ''}`;
+  } else {
+    alert("ID Motor tidak valid.");
+  }
+}
+
+    // Fungsi format angka ke Rupiah
+    const formatRupiah = (angka) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(angka);
+
+    if (motorId) {
+      fetch(`/api/motors`)
+        .then(res => res.json())
+        .then(data => {
+          const motor = data.motors.find(m => m.id == motorId);
+
+          if (motor) {
+            document.getElementById('motorTitle').textContent = motor.nama_motor;
+            document.getElementById('motorPrice').textContent = formatRupiah(motor.harga);
+
+            document.getElementById('specMesin').textContent = motor.mesin || '-';
+            document.getElementById('specTransmisi').textContent = motor.transmisi || '-';
+            document.getElementById('specBBM').textContent = motor.konsumsi_bbm || '-';
+            document.getElementById('specBerat').textContent = motor.berat || '-';
+
+            // --- LOGIKA INTERAKSI GAMBAR DAN WARNA ---
+            const colorPickerContainer = document.getElementById('colorPicker');
+            colorPickerContainer.innerHTML = ''; 
+            const motorImg = document.getElementById('motorImg');
+
+            if (motor.variants && motor.variants.length > 0) {
+              motorImg.src = `source/${motor.variants[0].variant_image}`;
+
+              motor.variants.forEach((variant, index) => {
+                const colorBtn = document.createElement('button');
+                colorBtn.className = `color-dot ${index === 0 ? 'active' : ''}`;
+                colorBtn.style.backgroundColor = variant.color_hex.trim();
+                
+                colorBtn.addEventListener('click', () => {
+                  motorImg.style.opacity = '0.3';
+                  setTimeout(() => {
+                    motorImg.src = `source/${variant.variant_image}`; 
+                    motorImg.style.opacity = '1';
+                  }, 150);
+
+                  document.querySelectorAll('.color-dot').forEach(btn => btn.classList.remove('active'));
+                  colorBtn.classList.add('active');
+                });
+
+                colorPickerContainer.appendChild(colorBtn);
+              });
+
+            } else {
+              motorImg.src = `source/${motor.gambar_motor || 'default.png'}`;
+              colorPickerContainer.innerHTML = '<span style="font-size:11px;color:#717182;">Standar</span>';
+            }
+
+            // Pengaturan link youtube
+            const btnYoutube = document.getElementById('btnLebihLengkap');
+            if (motor.link_youtube && motor.link_youtube.trim() !== "") {
+              btnYoutube.href = motor.link_youtube;
+            } else {
+              btnYoutube.href = `https://www.youtube.com/results?search_query=Suzuki+${encodeURIComponent(motor.nama_motor)}`;
+            }
+
+            // Pengaturan list keunggulan
+            const listContainer = document.getElementById('featuresList');
+            if (motor.keunggulan) {
+              listContainer.innerHTML = '';
+              const poinKeunggulan = motor.keunggulan
+                .split(/,|\n|;|•/)
+                .map(item => item.trim())
+                .filter(item => item.length > 0);
+
+              poinKeunggulan.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                listContainer.appendChild(li);
+              });
+            } else {
+              listContainer.innerHTML = '<li>Spesifikasi keunggulan belum diisi admin</li>';
+            }
+
+          } else {
+            document.getElementById('motorTitle').textContent = "Motor Tidak Ditemukan";
+          }
+        })
+        .catch(err => {
+          console.error(err);
+          document.getElementById('motorTitle').textContent = "Gagal Terhubung ke Server";
+        });
+    }
+  </script>
+</body>
+</html>

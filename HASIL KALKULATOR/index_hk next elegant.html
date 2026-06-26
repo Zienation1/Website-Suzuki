@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kalkulator Cicilan Motor</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f3f6fb;
+      color: #1f2937;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(180deg, #f8fbff 0%, #eef4fb 100%);
+    }
+
+    body,
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    .page-wrap {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 32px 16px;
+      position: relative;
+    }
+
+    .panel {
+      width: min(620px, 100%);
+      background: #ffffff;
+      border-radius: 32px;
+      box-shadow: 0 24px 60px rgba(15, 33, 86, 0.12);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Tombol Close X - Tanpa lingkaran */
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      background: none;
+      border: none;
+      color: #64748b;
+      font-size: 1.8rem;
+      font-weight: 300;
+      cursor: pointer;
+      padding: 8px 12px;
+      line-height: 1;
+      z-index: 10;
+      transition: all 0.2s ease;
+    }
+
+    .close-btn:hover {
+      color: #ef4444;
+      transform: scale(1.1);
+    }
+
+    .panel__header {
+      padding: 32px 32px 24px;
+    }
+
+    .panel__title {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .panel__subtitle {
+      margin: 10px 0 0;
+      color: #556987;
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 12px;
+      margin: 24px 32px 0;
+    }
+
+    .tab {
+      flex: 1;
+      min-height: 48px;
+      border: none;
+      border-radius: 24px;
+      background: #e8eff9;
+      color: #556987;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .tab:hover {
+      opacity: 0.9;
+    }
+
+    .tab--active {
+      background: #0f3d91;
+      color: #fff;
+    }
+
+    .content {
+      padding: 32px 32px 40px;
+    }
+
+    .hero {
+      max-width: 100%;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .hero__eyebrow {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      background: #0f3d91;
+      border-radius: 18px;
+    }
+
+    .hero__eyebrow svg {
+      width: 20px;
+      height: 20px;
+      color: #fff;
+    }
+
+    .hero__copy {
+      display: grid;
+      gap: 4px;
+    }
+
+    .hero__heading {
+      margin: 0;
+      font-size: clamp(2rem, 2.5vw, 2.6rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+
+    .hero__text {
+      margin: 0;
+      color: #556987;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .card {
+      background: #0f3d91;
+      border-radius: 28px;
+      padding: 28px;
+      color: #fff;
+    }
+
+    .card__block {
+      background: #f8fbff;
+      color: #1f2937;
+      border-radius: 24px;
+      padding: 26px 28px 28px;
+    }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+      font-weight: 700;
+    }
+
+    .section-label__icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      background: #0f3d91;
+    }
+
+    .section-label__icon svg {
+      width: 20px;
+      height: 20px;
+      color: #fff;
+    }
+
+    .section-label__title {
+      margin: 0;
+      font-size: 1.05rem;
+    }
+
+    .section-label__subtitle {
+      margin: 4px 0 0;
+      font-size: 0.95rem;
+      color: #4b5563;
+      font-weight: 500;
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .form-grid form {
+      display: contents;
+    }
+
+    .form-group {
+      display: grid;
+      gap: 10px;
+    }
+
+    .form-group label {
+      font-size: 0.9rem;
+      color: #334155;
+      font-weight: 600;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      min-height: 52px;
+      border-radius: 16px;
+      border: 1px solid #d2d8e8;
+      padding: 0 16px;
+      background: #f8fafc;
+      color: #0f172a;
+      font-size: 1rem;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #0f3d91;
+      box-shadow: 0 0 0 4px rgba(15, 61, 145, 0.12);
+    }
+
+    /* Button Tenor */
+    .tenor-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .tenor-btn {
+      flex: 1;
+      min-height: 52px;
+      border: 2px solid #d2d8e8;
+      background: #f8fafc;
+      color: #334155;
+      border-radius: 16px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .tenor-btn:hover {
+      border-color: #0f3d91;
+    }
+
+    .tenor-btn.active {
+      background: #0f3d91;
+      color: white;
+      border-color: #0f3d91;
+    }
+
+    .result-card {
+      margin-top: 24px;
+      background: #0f3d91;
+      border-radius: 28px;
+      padding: 32px 24px;
+      color: #fff;
+      display: grid;
+      gap: 12px;
+      place-items: center;
+      text-align: center;
+    }
+
+    .result-card__label {
+      margin: 0;
+      font-size: 1.1rem;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+    }
+
+    .result-card__value {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      font-weight: 600;
+      line-height: 1.05;
+    }
+
+    .result-card__meta {
+      margin: 0 0 8px;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.95rem;
+    }
+
+    /* DESAIN TOMBOL WHATSAPP */
+    .btn-calc {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      min-height: 48px;
+      background-color: #25d366;
+      color: #ffffff;
+      border: none;
+      border-radius: 14px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+      padding: 0 16px;
+    }
+
+    .btn-calc:hover {
+      background-color: #20ba56;
+    }
+
+    .btn-calc:active {
+      transform: scale(0.99);
+    }
+
+    .btn-calc svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page-wrap">
+    <article class="panel" aria-label="Kalkulator cicilan motor">
+
+      <button class="close-btn" onclick="closePage()" aria-label="Tutup">
+        ×
+      </button>
+
+      <header class="panel__header">
+        <h1 class="panel__title">Suzuki Nex II Standart</h1>
+        <p class="panel__subtitle">Detail lengkap spesifikasi dan simulasi kredit motor</p>
+      </header>
+
+      <div class="tabs" role="tablist" aria-label="Navigasi kalkulator">
+        <button class="tab" role="tab" id="tabDetail" aria-selected="false" type="button" onclick="goToDetailMotor()">
+          Detail Motor
+        </button>
+        <button class="tab tab--active" role="tab" id="tabKalkulator" aria-selected="true" type="button" onclick="stayInKalkulator()">
+          Kalkulator Cicilan
+        </button>
+      </div>
+
+      <section class="content">
+        <div class="hero">
+          <div class="hero__eyebrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M7 2H17C19.2091 2 21 3.79086 21 6V18C21 20.2091 19.2091 22 17 22H7C4.79086 22 3 20.2091 3 18V6C3 3.79086 4.79086 2 7 2Z"
+                stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M8.5 9H15.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+              <path d="M8.5 14H12.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+            </svg>
+          </div>
+          <div class="hero__copy">
+            <h2 class="hero__heading">KALKULATOR CICILAN</h2>
+            <p class="hero__text">Hitung cicilan mudah dan cepat</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card__block">
+            <div class="section-label">
+              <span class="section-label__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M17 3H7C5.9 3 5 3.9 5 5V19C5 20.1 5.9 21 7 21H17C18.1 21 19 20.1 19 19V5C19 3.9 18.1 3 17 3Z"
+                    stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M9 8H15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                  <path d="M9 12H15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                  <path d="M9 16H13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                </svg>
+              </span>
+              <div>
+                <p class="section-label__title">Input Data</p>
+                <p class="section-label__subtitle">Masukkan detail pembelian motor</p>
+              </div>
+            </div>
+
+            <div class="form-grid">
+              <form action="#" novalidate onsubmit="return false;">
+                <div class="form-group">
+                  <label for="hargaMotor">Harga Motor</label>
+                  <input id="hargaMotor" name="hargaMotor" type="text" value="Rp 21.470.000" readonly />
+                </div>
+
+                <div class="form-group">
+                  <label for="dp">Down Payment (DP)</label>
+                  <select id="dp" name="dp">
+                    <option value="" disabled selected>Pilih DP</option>
+                    <option value="2200000">Rp 2.200.000</option>
+                    <option value="2500000">Rp 2.500.000</option>
+                    <option value="3000000">Rp 3.000.000</option>
+                    <option value="3500000">Rp 3.500.000</option>
+                    <option value="4000000">Rp 4.000.000</option>
+                    <option value="4500000">Rp 4.500.000</option>
+                    <option value="5000000">Rp 5.000.000</option>
+                    <option value="5500000">Rp 5.500.000</option>
+                    <option value="6000000">Rp 6.000.000</option>
+                    <option value="6500000">Rp 6.500.000</option>
+                    <option value="7000000">Rp 7.000.000</option>
+                    <option value="7500000">Rp 7.500.000</option>
+                    <option value="8000000">Rp 8.000.000</option>
+                    <option value="8500000">Rp 8.500.000</option>
+                    <option value="9000000">Rp 9.000.000</option>
+                    <option value="9500000">Rp 9.500.000</option>
+                    <option value="10000000">Rp 10.000.000</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label>Tenor (Jangka Waktu)</label>
+                  <div class="tenor-buttons" id="tenorButtons">
+                    <button type="button" class="tenor-btn" data-tenor="12">1 Tahun</button>
+                    <button type="button" class="tenor-btn" data-tenor="24">2 Tahun</button>
+                    <button type="button" class="tenor-btn" data-tenor="36">3 Tahun</button>
+                  </div>
+                  <input type="hidden" id="tenor" name="tenor" value="">
+                </div>
+              </form>
+            </div>
+
+            <div class="result-card hidden" id="resultCard" aria-live="polite">
+              <p class="result-card__label">Angsuran yang dibayar</p>
+              <p class="result-card__value" id="monthlyPayment">Rp 0</p>
+              <p class="result-card__meta" id="resultNote">Pilih Down Payment dan tenor untuk melihat angsuran.</p>
+              
+              <a href="#" id="whatsappBtn" class="btn-calc" target="_blank">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.964 9.964 0 0 0 1.333 4.993L2 22l5.233-1.371a9.936 9.936 0 0 0 4.777 1.212c5.505 0 9.99-4.477 9.991-9.986C22.002 6.478 17.518 2 12.012 2zm5.832 14.288c-.255.719-1.488 1.314-2.043 1.396-.51.074-1.176.134-3.411-.794-2.856-1.185-4.664-4.108-4.806-4.298-.143-.189-1.144-1.522-1.144-2.903 0-1.381.714-2.062.969-2.346.255-.284.561-.355.748-.355.187 0 .374.002.536.01.169.008.397-.065.621.474.226.541.776 1.895.843 2.037.067.142.112.308.018.498-.095.19-.143.308-.284.474-.143.166-.3.37-.428.498-.143.142-.293.298-.126.588.167.289.743 1.226 1.594 1.984 1.099.979 2.023 1.282 2.312 1.424.289.142.459.119.63-.076.17-.194.726-.844.919-1.129.193-.284.386-.237.652-.138.266.1.1.693.308 1.432c.208.739 1.314.979 1.484 1.074.17.095.34.142.509.047.169-.095 1.054-1.226.801-1.944z"/>
+                </svg>
+                Chat sales untuk mendapatkan diskon lebih
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </article>
+  </div>
+
+  <script>
+    const tenorButtons = document.querySelectorAll('.tenor-btn');
+    const tenorInput = document.getElementById('tenor');
+
+    const dpSelect = document.getElementById('dp');
+    const resultCard = document.getElementById('resultCard');
+    const monthlyPayment = document.getElementById('monthlyPayment');
+    const resultNote = document.getElementById('resultNote');
+    const whatsappBtn = document.getElementById('whatsappBtn');
+
+    // FORMAT RUPIAH
+    function formatRupiah(value) {
+      return "Rp " + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    }
+
+    function updateInstallment() {
+      const dpValue = Number(dpSelect.value);
+      const tenorValue = Number(tenorInput.value);
+      let monthly = 0;
+
+      // Proteksi jika DP belum dipilih pengguna
+      if (!dpSelect.value) {
+        resultCard.classList.add("hidden");
+        return;
+      }
+
+      // Data Suzuki Nex II Standard
+      if (dpValue == 2200000) {
+        if (tenorValue == 12) monthly = 2197000;
+        else if (tenorValue == 24) monthly = 1199000;
+        else if (tenorValue == 36) monthly = 915000;
+      }
+      else if (dpValue == 2500000) {
+        if (tenorValue == 12) monthly = 2063000;
+        else if (tenorValue == 24) monthly = 1199000;
+        else if (tenorValue == 36) monthly = 893000;
+      }
+      else if (dpValue == 3000000) {
+        if (tenorValue == 12) monthly = 2009000;
+        else if (tenorValue == 24) monthly = 1170000;
+        else if (tenorValue == 36) monthly = 870000;
+      }
+      else if (dpValue == 3500000) {
+        if (tenorValue == 12) monthly = 1955000;
+        else if (tenorValue == 24) monthly = 1140000;
+        else if (tenorValue == 36) monthly = 848000;
+      }
+      else if (dpValue == 4000000) {
+        if (tenorValue == 12) monthly = 1901000;
+        else if (tenorValue == 24) monthly = 1111000;
+        else if (tenorValue == 36) monthly = 825000;
+      }
+      else if (dpValue == 4500000) {
+        if (tenorValue == 12) monthly = 1848000;
+        else if (tenorValue == 24) monthly = 1081000;
+        else if (tenorValue == 36) stroke = 803000; monthly = 803000;
+      }
+      else if (dpValue == 5000000) {
+        if (tenorValue == 12) monthly = 1794000;
+        else if (tenorValue == 24) monthly = 1051000;
+        else if (tenorValue == 36) monthly = 781000;
+      }
+      else if (dpValue == 5500000) {
+        if (tenorValue == 12) monthly = 1740000;
+        else if (tenorValue == 24) monthly = 1022000;
+        else if (tenorValue == 36) monthly = 762000;
+      }
+      else if (dpValue == 6000000) {
+        if (tenorValue == 12) monthly = 1686000;
+        else if (tenorValue == 24) monthly = 992000;
+        else if (tenorValue == 36) monthly = 740000;
+      }
+      else if (dpValue == 6500000) {
+        if (tenorValue == 12) monthly = 1632000;
+        else if (tenorValue == 24) monthly = 963000;
+        else if (tenorValue == 36) monthly = 717000;
+      }
+      else if (dpValue == 7000000) {
+        if (tenorValue == 12) monthly = 1676000;
+        else if (tenorValue == 24) monthly = 933000;
+        else if (tenorValue == 36) monthly = 695000;
+      }
+      else if (dpValue == 7500000) {
+        if (tenorValue == 12) monthly = 1622000;
+        else if (tenorValue == 24) monthly = 903000;
+        else if (tenorValue == 36) monthly = 672000;
+      }
+      else if (dpValue == 8000000) {
+        if (tenorValue == 12) monthly = 1569000;
+        else if (tenorValue == 24) monthly = 874000;
+        else if (tenorValue == 36) monthly = 650000;
+      }
+      else if (dpValue == 8500000) {
+        if (tenorValue == 12) monthly = 1515000;
+        else if (tenorValue == 24) monthly = 844000;
+        else if (tenorValue == 36) monthly = 646000;
+      }
+      else if (dpValue == 9000000) {
+        if (tenorValue == 12) monthly = 1461000;
+        else if (tenorValue == 24) monthly = 814000;
+        else if (tenorValue == 36) monthly = 624000;
+      }
+      else if (dpValue == 9500000) {
+        if (tenorValue == 12) monthly = 1407000;
+        else if (tenorValue == 24) monthly = 785000;
+        else if (tenorValue == 36) monthly = 601000;
+      }
+      else if (dpValue == 10000000) {
+        if (tenorValue == 12) monthly = 1353000;
+        else if (tenorValue == 24) monthly = 755000;
+        else if (tenorValue == 36) monthly = 579000;
+      }
+
+      // TAMPIL HASIL
+if (monthly > 0) {
+  monthlyPayment.innerHTML = formatRupiah(monthly);
+
+  // ========================================================
+  // LOGIKA PESAN WA DINAMIS (BISA UNTUK SEMUA JENIS MOTOR)
+  // ========================================================
+  const motorName = document.querySelector('.panel__title').innerText.trim();
+  const installmentText = formatRupiah(monthly);
+  
+  // Mengambil teks dari option DP yang dipilih (ex: "Rp 3.000.000")
+  const dpText = dpSelect.options[dpSelect.selectedIndex].text; 
+
+  // Format kalimat pesan WhatsApp (Menggunakan '\n' untuk baris baru)
+  const textMessage = `Halo Sales Suzuki, saya tertarik dengan unit *${motorName}*.\n\n` +
+                      `Saya sudah mencoba simulasi di website dengan detail:\n` +
+                      `- Down Payment (DP): ${dpText}\n` +
+                      `- Tenor: ${tenorValue} Bulan\n` +
+                      `- Angsuran: *${installmentText}/bulan*\n\n` +
+                      `Boleh minta info lebih lanjut terkait ketersediaan unit dan diskonnya? Terima kasih.`;
+
+  // Menggunakan kode negara 62 agar parameter pesan teks ter-encode dengan sempurna
+  const waUrl = `https://wa.me/6282299318387?text=${encodeURIComponent(textMessage)}`;
+
+  const waBtn = document.getElementById('waSalesBtn');
+  if (waBtn) {
+    waBtn.href = waUrl;
+  }
+  
+  resultNote.innerHTML = "Cicilan selama " + tenorValue + " bulan";
+  resultCard.classList.remove("hidden");
+} else {
+  resultCard.classList.add("hidden");
+}
+    }
+
+    // BUTTON TENOR EVENT
+    tenorButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        tenorButtons.forEach(btn => {
+          btn.classList.remove("active");
+        });
+        button.classList.add("active");
+        tenorInput.value = button.dataset.tenor;
+        updateInstallment();
+      });
+    });
+
+    // DP CHANGE EVENT
+    dpSelect.addEventListener("change", updateInstallment);
+
+    // CLOSE BUTTON
+    function closePage() {
+      if (confirm("Apakah Anda yakin ingin kembali ke spesifikasi motor?")) {
+        window.location.href = "../SPESIFIKASI/index_nexiielegant.html";
+      }
+    }
+
+    // NAVIGATION TABS
+    function goToDetailMotor() {
+      document.getElementById('tabDetail').classList.add('tab--active');
+      document.getElementById('tabKalkulator').classList.remove('tab--active');
+      setTimeout(() => {
+        window.location.href = "../SPESIFIKASI/index_nexiielegant.html";
+      }, 100);
+    }
+
+    function stayInKalkulator() {
+      document.getElementById('tabDetail').classList.remove('tab--active');
+      document.getElementById('tabKalkulator').classList.add('tab--active');
+    }
+
+    // 1. AMBIL PARAMETER URL (ID MOTOR & ASAL HALAMAN)
+// ========================================================
+const urlParams = new URLSearchParams(window.location.search);
+const motorId = urlParams.get('id');
+const asalHalaman = urlParams.get('from');
+
+// Helper untuk format angka ke Rupiah saat dimasukkan ke input
+function formatRupiahKalkulator(value) {
+  return "Rp " + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+}
+
+// ========================================================
+// 2. FETCH HARGA DARI DATABASE (HANYA MENGGANTI HARGA MOTOR)
+// ========================================================
+if (motorId) {
+  fetch(`/api/motors`)
+    .then(res => res.json())
+    .then(data => {
+      // Mencari data motor berdasarkan ID yang dikirim
+      const motor = data.motors.find(m => m.id == motorId);
+      if (motor) {
+        const inputHarga = document.getElementById('hargaMotor');
+        
+        // Ganti nilai input harga dengan harga realtime database
+        inputHarga.value = formatRupiahKalkulator(motor.harga);
+
+        // Memicu ulang event listener atau jalankan fungsi hitung otomatis Anda (jika ada)
+        // misal: inputHarga.dispatchEvent(new Event('input'));
+        if (typeof updateInstallment === 'function') {
+          updateInstallment();
+        }
+      }
+    })
+    .catch(err => {
+      console.error("Gagal memuat harga terupdate dari database:", err);
+    });
+}
+
+// ========================================================
+// 3. PERBAIKAN TOMBOL CLOSE (& NAVIGASI TAB DETAIL)
+// ========================================================
+function closePage() {
+  if (confirm("Apakah Anda yakin ingin kembali ke Detail Motor?")) {
+    // Kembali ke detail motor dengan membawa id dan parameter asal halaman sebelumnya
+    window.location.href = `../KATALOG/detail_motor.html?id=${motorId}&from=${asalHalaman}`;
+  }
+}
+
+// Jika tab "Detail Motor" diklik, arahkan ke fungsi yang sama
+function goToDetailMotor() {
+  window.location.href = `../KATALOG/detail_motor.html?id=${motorId}&from=${asalHalaman}`;
+
+      };
+    </script>
+</body>
+
+</html>

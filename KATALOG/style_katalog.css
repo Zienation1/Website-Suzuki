@@ -1,0 +1,29 @@
+/* Beranda */
+.beranda {
+  color: #003399;
+  font-size: 14px;
+  font-family: Inter;
+  font-weight: 500;
+  line-height: 20px;
+  word-wrap: break-word;
+}
+
+/* Katalog Motor */
+.katalog-motor {
+  color: white;
+  font-size: 14px;
+  font-family: Inter;
+  font-weight: 500;
+  line-height: 20px;
+  word-wrap: break-word;
+}
+
+/* Bandingkan Motor */
+.bandingkan-motor {
+  color: #003399;
+  font-size: 14px;
+  font-family: Inter;
+  font-weight: 500;
+  line-height: 20px;
+  word-wrap: break-word;
+}

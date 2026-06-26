@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beranda Suzuki</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --page-bg: #f4f6fb;
+      --surface: #ffffff;
+      --surface-strong: #003399;
+      --text: #030213;
+      --muted: #5b607a;
+      --border: rgba(0, 51, 153, 0.16);
+      --radius: 24px;
+      --radius-sm: 10px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100vh;
+      width: 100%;
+    }
+
+    body {
+      font-family: Inter, system-ui, sans-serif;
+      background: var(--page-bg);
+      color: var(--text);
+      overflow-x: hidden; /* Mencegah scrollbar horizontal siluman */
+    }
+
+    .page {
+      width: 100%;
+      min-height: 100vh;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 24px;
+      background: var(--surface);
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      box-shadow: 0 24px 50px rgba(0, 0, 0, 0.08);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .logo img {
+      width: 185px;
+      height: auto;
+      display: block;
+    }
+
+    .footer-logo {
+      width: 140px;
+      height: auto;
+      display: block;
+      margin-bottom: 18px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .nav-link {
+      height: 36px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      background: var(--surface);
+      border: 1px solid var(--surface-strong);
+      color: var(--surface-strong);
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 20px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-link:hover {
+      background: #eef2ff;
+      transform: translateY(-1px);
+    }
+
+    .nav-link.active {
+      background: var(--surface-strong);
+      color: #ffffff;
+      border-color: var(--surface-strong);
+    }
+
+    .nav-link.active:hover {
+      background: #002266;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 24px;
+      align-items: center;
+      padding: 32px;
+      background: var(--surface);
+      border-radius: 24px;
+      border: 1px solid var(--surface-strong);
+      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.08);
+      animation: fadeUp 0.8s ease-out;
+    }
+
+    .hero-title {
+      margin: 0;
+      font-size: clamp(28px, 3vw, 42px);
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--surface-strong);
+    }
+
+    .hero-text {
+      margin: 16px 0 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.75;
+      max-width: 560px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .button-primary,
+    .button-secondary,
+    .card-button {
+      border: none;
+      border-radius: 12px;
+      padding: 14px 22px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .button-primary,
+    .card-button {
+      background: var(--surface-strong);
+      color: #ffffff;
+      box-shadow: 0 16px 30px rgba(0, 51, 153, 0.18);
+    }
+
+    .button-secondary {
+      background: var(--surface);
+      color: var(--surface-strong);
+      border: 1px solid var(--surface-strong);
+    }
+
+    .button-primary:hover,
+    .button-secondary:hover,
+    .card-button:hover,
+    .catalog-card .detail-button:hover {
+      transform: scale(1.03);
+      box-shadow: 0 12px 25px rgba(0, 51, 153, 0.25);
+    }
+
+    .button-primary:active,
+    .button-secondary:active,
+    .card-button:active,
+    .catalog-card .detail-button:active {
+      transform: scale(0.95);
+    }
+
+    .hero-visual {
+      min-height: 260px;
+      background: #ececf0;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+
+    .hero-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .hero-visual:hover img {
+      transform: scale(1.05);
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .feature-grid,
+    .promo-grid,
+    .stats-grid,
+    .event-section {
+      display: grid;
+      gap: 24px;
+    }
+
+    .feature-grid,
+    .promo-grid {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .stats-grid {
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+
+    .feature-card,
+    .promo-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.06);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      min-height: 340px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 35px 90px rgba(0, 0, 0, 0.1);
+    }
+
+    .feature-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      background: #eef2ff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--surface-strong);
+      font-size: 24px;
+      transition: transform 0.3s ease;
+    }
+
+    .feature-card:hover .feature-icon {
+      transform: rotate(10deg) scale(1.1);
+    }
+
+    .card-title {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .card-text {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .promo-card h3 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .promo-card p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.9);
+      line-height: 1.7;
+    }
+
+    .promo-card .catalog-visual {
+      min-height: 180px;
+      background: #ececf0;
+      border-radius: 18px;
+      overflow: hidden;
+    }
+
+    .promo-card .catalog-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    @keyframes munculKeDepan {
+      0% {
+        opacity: 0;
+        transform: translateY(40px) scale(0.9);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .promo-grid .catalog-card:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+
+    .promo-grid .catalog-card:nth-child(2) {
+      animation-delay: 0.3s;
+    }
+
+    .promo-grid .catalog-card:nth-child(3) {
+      animation-delay: 0.5s;
+    }
+
+    .catalog-card {
+      background: var(--surface-strong);
+      border-radius: 20px;
+      overflow: hidden;
+      display: grid;
+      grid-template-rows: 192px 1fr auto;
+      min-height: 380px;
+      opacity: 0;
+      animation: munculKeDepan 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      transition: transform 0.3s ease;
+    }
+
+    .catalog-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .catalog-card .catalog-visual {
+      background: #ececf0;
+      min-height: 192px;
+      overflow: hidden;
+    }
+
+    .catalog-card .catalog-visual img {
+      transition: transform 0.4s ease;
+    }
+
+    .catalog-card:hover .catalog-visual img {
+      transform: scale(1.08);
+    }
+
+    .catalog-card .catalog-content {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .catalog-card h3 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.2;
+      color: #ffffff;
+    }
+
+    .catalog-card p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.92);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .catalog-card .price {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .catalog-card .detail-button {
+      margin-top: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 56px;
+      background: #ffffff;
+      color: #003399;
+      border-radius: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .event-card,
+    .news-card {
+      background: var(--surface);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.06);
+    }
+
+    .event-card h3,
+    .news-card h3 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--surface-strong);
+    }
+
+    .event-card p,
+    .news-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 15px;
+    }
+
+    .stats-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      text-align: center;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .stats-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--surface-strong);
+    }
+
+    .stat-value {
+      font-size: 28px;
+      font-weight: 800;
+      margin: 0;
+      color: var(--text);
+    }
+
+    .stat-label {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .footer-card {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 32px;
+      background: var(--surface);
+      border-radius: 20px;
+      padding: 32px;
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);
+    }
+
+    .footer-info {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .footer-column {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .footer-column h4 {
+      margin: 0 0 14px;
+      color: var(--surface-strong);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .footer-column p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+      font-weight: 400;
+      cursor: pointer;
+      display: inline-block;
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .footer-column p:hover {
+      color: var(--surface-strong);
+      text-decoration: underline;
+      transform: translateX(4px);
+    }
+
+    .footer-column p:active {
+      color: #001f5a;
+      transform: translateX(2px) scale(0.98);
+    }
+
+    .footer-bottom {
+      padding-top: 24px;
+      border-top: 1px solid rgba(0, 51, 153, 0.12);
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* =======================================================
+       MEDIA QUERIES (Sistem Otomatis Responsif Laptop & HP)
+       ======================================================= */
+
+    /* 1. Layar Tablet & Laptop Kecil (< 980px) */
+    @media (max-width: 980px) {
+      .hero {
+        grid-template-columns: 1fr; /* Hero menumpuk vertikal */
+        padding: 24px;
+      }
+
+      .hero-visual {
+        min-height: 220px;
+        order: -1; /* Gambar dealer naik ke atas teks di layar kecil */
+      }
+
+      .topbar {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 18px;
+      }
+
+      .nav-links {
+        justify-content: center;
+        width: 100%;
+      }
+      
+      .nav-link {
+        flex-grow: 1; /* Tombol menu membesar proporsional */
+      }
+    }
+
+    /* 2. Layar Handphone / HP (< 576px) */
+    @media (max-width: 576px) {
+      .container {
+        padding: 16px;
+        gap: 16px;
+      }
+
+      .topbar {
+        border-radius: 16px;
+      }
+
+      .logo img {
+        width: 150px; /* Logo mengecil sedikit di HP */
+      }
+
+      .hero-title {
+        font-size: 24px;
+      }
+
+      .hero-text {
+        font-size: 14px;
+      }
+
+      .button-primary, .button-secondary, .card-button {
+        width: 100%; /* Tombol memenuhi lebar HP agar mudah ditekan */
+      }
+
+      .feature-card, .promo-card {
+        padding: 20px;
+        min-height: auto;
+      }
+
+      .catalog-card {
+        grid-template-rows: 160px 1fr auto;
+      }
+
+      .catalog-card .catalog-visual img {
+        width: 130% !important; /* Mencegah gambar motor terlalu zoom-out di HP */
+      }
+
+      .footer-card {
+        padding: 24px;
+        gap: 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <div class="container">
+      <header class="topbar">
+        <div class="logo">
+          <img src="img/image 1.png" alt="Suzuki logo" />
+          <div style="font-size: 18px; font-weight: 700; color: #003399;"></div>
+        </div>
+        <nav class="nav-links">
+          <a href="index_beranda.html" class="nav-link active">
+            <img src="IMG/Icon-8.svg" alt="Beranda" width="18" height="18" />
+            Beranda
+          </a>
+          <a href="../KATALOG/katalog.html" class="nav-link">
+            <img src="IMG/Icon-7.svg" alt="Katalog" width="18" height="18" />
+            Katalog Motor
+          </a>
+          <a href="../BANDING MOTOR/index_bm.html" class="nav-link">
+            <img src="IMG/Icon-5.svg" alt="Bandingkan" width="18" height="18" />
+            Bandingkan Motor
+          </a>
+        </nav>
+      </header>
+
+      <section class="hero">
+        <div>
+          <h1 class="hero-title">Selamat datang di Suzuki!</h1>
+          <p class="hero-text">Temukan motor pilihanmu disini. Yuk intip katalog kami, lalu pilih fitur bandingkan
+            motor, serta hitung kredit motor impianmu!</p>
+          <div class="hero-actions">
+            <a class="button-primary" href="../KATALOG/katalog.html">
+              <img src="IMG/Icon-3.svg" alt="Ikon Katalog" width="18" height="18"
+                style="filter: brightness(0) invert(1);" />
+              Lihat Katalog
+            </a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <img src="IMG/source/Dealer Suzuki 1.png" alt="Dealer Suzuki" />
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title">Fitur Utama</h2>
+      </section>
+
+      <section class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon"><img src="IMG/Icon-2.svg" alt="Ikon Katalog" width="28" height="28" /></div>
+          <h2 class="card-title">Katalog Motor</h2>
+          <p class="card-text">Telusuri seluruh koleksi motor Suzuki dengan spesifikasi lengkap dan simulasi kredit.</p>
+          <a class="button-primary" href="../KATALOG/katalog.html">
+            <img src="IMG/Icon-3.svg" alt="Ikon Katalog" width="18" height="18"
+              style="filter: brightness(0) invert(1);" />
+            Lihat Katalog
+          </a>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><img src="IMG/Icon-5.svg" alt="Ikon Bandingkan" width="28" height="28" /></div>
+          <h2 class="card-title">Bandingkan Motor</h2>
+          <p class="card-text">Bandingkan spesifikasi dan fitur dua motor untuk membantu keputusan pembelian Anda.</p>
+          <a href="../BANDING MOTOR/index_bm.html" class="card-button">
+            <img src="IMG/Icon-3.svg" alt="Bandingkan" width="18" height="18" />
+            Mulai Bandingkan
+          </a>
+        </div>
+      </section>
+
+      <section style="display:flex; justify-content:space-between; align-items:center; gap:16px;">
+        <h2 class="section-title">Motor Unggulan</h2>
+        <a class="button-secondary" href="../KATALOG/katalog.html">Lihat Semua</a>
+      </section>
+
+      <section class="promo-grid" id="motor-unggulan-container">
+        </section>
+
+      <section class="stats-grid">
+        <div class="stats-card">
+          <div class="stat-value">10+</div>
+          <div class="stat-label">Model Motor</div>
+        </div>
+        <div class="stats-card">
+          <div class="stat-value">100+</div>
+          <div class="stat-label">Dealer Indonesia</div>
+        </div>
+        <div class="stats-card">
+          <div class="stat-value">20+</div>
+          <div class="stat-label">Event Bulanan</div>
+        </div>
+        <div class="stats-card">
+          <div class="stat-value">24/7</div>
+          <div class="stat-label">Customer Support</div>
+        </div>
+      </section>
+
+      <footer class="footer-card">
+        <div>
+          <img src="img/image 1.png" alt="Suzuki logo" class="footer-logo" />
+          <div class="footer-info">Platform informasi terlengkap untuk motor Suzuki Indonesia</div>
+        </div>
+        <div class="footer-column">
+          <h4>Produk</h4>
+          <p onclick="window.location.href='../KATALOG/katalog.html?kategori=Sport'">Sport</p>
+          <p onclick="window.location.href='../KATALOG/katalog.html?kategori=Matic'">Matic</p>
+          <p onclick="window.location.href='../KATALOG/katalog.html?kategori=Adventure'">Adventure</p>
+        </div>
+        <div class="footer-column">
+          <h4>Kontak</h4>
+          <p onclick="window.open('https://wa.me/082299318387?text=Halo%20Suzuki%2C%20saya%20mempunyai%20pertanyaan', '_blank')">WhatsApp Sales</p>
+          <p onclick="window.open('https://mail.google.com/mail/?view=cm&fs=1&to=suzukimotorindrapura@gmail.com&su=Tanya%20Seputar%20Motor%20Suzuki', '_blank')">Email Support</p>
+          <p onclick="window.open('https://www.google.com/maps/search/Dealer+Suzuki+Motor+Terdekat', '_blank')">Lokasi Dealer</p>
+        </div>
+        <div class="footer-column">
+          <h4>Lainnya</h4>
+          <p onclick="window.location.href='../ADMIN/index admin.html'">Admin</p>
+        </div>
+      </footer>
+      <div class="footer-bottom">© 2026 Suzuki Motorcycle Indonesia. Semua hak dilindungi.</div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const containerMotor = document.getElementById("motor-unggulan-container");
+
+      // Bersihkan kontainer utama terlebih dahulu
+      containerMotor.innerHTML = "";
+
+      // 1. Alamat API Backend dari server.js
+      const API_URL = "/api/motors";
+
+      // 2. ID Motor Unggulan yang ingin ditampilkan (Sesuaikan dengan ID di phpMyAdmin kamu)
+      const targetIds = [1, 5, 6];
+
+      try {
+        const response = await fetch(API_URL);
+        if (!response.ok) throw new Error("Gagal mengambil data dari database");
+
+        const resData = await response.json();
+        const dataMotorDariDatabase = resData.motors;
+
+        // 3. Render 3 Motor Pilihan
+        targetIds.forEach(id => {
+          const motor = dataMotorDariDatabase.find(m => m.id == id);
+
+          if (motor) {
+            const kartuKatalog = document.createElement("div");
+            kartuKatalog.className = "catalog-card";
+
+            const nominalHarga = parseInt(motor.harga) || 0;
+
+            // Menggunakan fallback gambar lokal jika field database kosong
+            const namaGambar = motor.gambar_motor || motor.gambar || 'Burgman.png';
+
+            kartuKatalog.innerHTML = `
+              <div class="catalog-visual" style="display: flex; justify-content: center; align-items: center;">
+                 <img src="../KATALOG/source/${namaGambar}" alt="${motor.nama_motor || motor.nama}" style="width: 180%; height: 109%; object-fit: contain; padding: 0px; display: block;" onerror="this.src='IMG/Burgman.png'" />
+              </div>
+              <div class="catalog-content">
+                <div>
+                  <h3>${motor.nama_motor || motor.nama}</h3>
+                  <p>${motor.deskripsi || "Tampil stylish dengan fitur modern dan kenyamanan maksimal."}</p>
+                </div>
+                <div>
+                  <div class="price">Rp ${nominalHarga.toLocaleString('id-ID')}</div>
+                  <a class="detail-button" href="../KATALOG/detail_motor.html?id=${motor.id}&from=beranda">Lihat Detail</a>
+                </div>
+              </div>
+            `;
+            containerMotor.appendChild(kartuKatalog);
+          }
+        });
+
+      } catch (error) {
+        console.error("Error Fetch data beranda unggulan:", error);
+        containerMotor.innerHTML = "<h3 style='color: red; text-align: center; grid-column: 1/-1;'>Gagal memuat data motor dari server API.</h3>";
+      }
+    });
+  </script>
+</body>
+
+</html>

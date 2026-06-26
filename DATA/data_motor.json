@@ -1,0 +1,334 @@
+[
+  {
+    "id": "access125",
+    "nama": "Suzuki Access 125",
+    "kategori": "Skuter",
+    "harga": "Rp 26.050.000",
+    "mesin": "125cc, Air-Cooled",
+    "transmisi": "Automatic CVT",
+    "bbm": "57,3 km/L",
+    "R": "5,0 L",
+    "berat": "106 kg",
+    "youtube": "https://youtu.be/IeTl7BzySm0?si=_yt5bBHA7Hi_hbbV",
+    "warna": [
+      {
+        "id": "green",
+        "hex": "#8ED9CE",
+        "img": "../SPESIFIKASI/source/AccessHijau.jpg"
+      },
+      {
+        "id": "black",
+        "hex": "#2B2B2B",
+        "img": "../SPESIFIKASI/source/AccessHitam.jpg"
+      },
+      {
+        "id": "white",
+        "hex": "#EAE2CE",
+        "img": "../SPESIFIKASI/source/AccessPutih.jpg"
+      }
+    ],
+    "keunggulan": [
+      "Cover full tank",
+      "Bagasi berkapasitas 24,4L",
+      "Menggunakan panel speedometer analog dengan odometer digital",
+      "Pijakan Kaki Luas dan Nyaman",
+      "Easy Start System",
+      "Memiliki 2 Kompartemen Penyimpanan",
+      "Lampu Full LED Premium",
+      "Dilengkapi USB Outlet"
+    ]
+  },
+  {
+    "id": "addressfi",
+    "nama": "Suzuki Address FI",
+    "kategori": "Skuter",
+    "harga": "Rp 28.000.000",
+    "mesin": "113cc",
+    "transmisi": "Automatic CVT",
+    "bbm": "45 km/L",
+    "kapasitasTangki": "5,2 L",
+    "berat": "95 kg",
+    "youtube": "https://youtu.be/4YMgmbTJ560?si=3-tyxI5z-K5q1LHY",
+    "warna": [
+      {
+        "id": "white",
+        "hex": "#F2F4F7",
+        "img": "../SPESIFIKASI/source/AddressPutih.jpg"
+      },
+      {
+        "id": "silver",
+        "hex": "#9E9E9E",
+        "img": "../SPESIFIKASI/source/AddressAbu.jpg"
+      },
+      {
+        "id": "black",
+        "hex": "#000000",
+        "img": "../SPESIFIKASI/source/AddressHitam.jpg"
+      }
+    ],
+    "keunggulan": [
+      "Ruang Penyimpanan di depan yang lapang",
+      "Pijakan kaki yang luas",
+      "Pengaman kunci dengan kunci pembuka jok",
+      "Kapasitas bagasi 20.6L",
+      "Konsumsi Bahan Bakar Irit"
+    ]
+  },
+  {
+    "id": "burgman125ex",
+    "nama": "Suzuki Burgman Street 125Ex",
+    "kategori": "Skuter",
+    "harga": "Rp 26.843.500",
+    "mesin": "125cc",
+    "transmisi": "Automatic CVT",
+    "bbm": "1,9L/100km (52,6km/L)",
+    "kapasitasTangki": "5,6 L",
+    "berat": "111 kg",
+    "youtube": "https://youtu.be/_H4q08qg1Rs?si=7JdZjQn4J6xWhkZ5=",
+    "warna": [
+      {
+        "id": "blue",
+        "hex": "#003870",
+        "img": "../SPESIFIKASI/source/Burgman.png"
+      },
+      {
+        "id": "black",
+        "hex": "#000000",
+        "img": "../SPESIFIKASI/source/Burgman 3.jpg"
+      },
+      {
+        "id": "bronze",
+        "hex": "#3A3A3A",
+        "img": "../SPESIFIKASI/source/Burgman 2.jpg"
+      }
+    ],
+    "keunggulan": [
+      "Pijakan kaki luas",
+      "Bagasi berkapasitas 21,5 liter",
+      "Menggunakan Engine Auto Stop-Start and Silent Startrer System",
+      "Mesin Irit dengan Teknologi SEP-α",
+      "Rich Compartmets with USB Outlet",
+      "Menggunakan digital spedometer"
+    ]
+  },
+  {
+    "id": "gsxr150",
+    "nama": "Suzuki GSX-R150",
+    "kategori": "Sport",
+    "harga": "Rp 36.100.000",
+    "mesin": "150cc",
+    "transmisi": "6-speed, return",
+    "bbm": "38 km/L",
+    "kapasitasTangki": "11,0 L",
+    "berat": "131 kg",
+    "youtube": "https://youtu.be/lvxEHYFhdh8?si=fLQrBT4acwBZp4rT",
+    "warna": [
+      {
+        "id": "blue",
+        "hex": "#0088C2",
+        "img": "../SPESIFIKASI/source/GSXR-BIRU.jpg"
+      },
+      {
+        "id": "black",
+        "hex": "#000000",
+        "img": "../SPESIFIKASI/source/GSXR-HITAM.jpg"
+      },
+      {
+        "id": "red",
+        "hex": "#E30613",
+        "img": "../SPESIFIKASI/source/GSXR-MERAH.jpg"
+      }
+    ],
+    "keunggulan": [
+      "LCD speedometer backlight",
+      "Sistem Key-less",
+      "Speedometer LCD digital",
+      "Easy start system",
+      "Hazard lamp"
+    ]
+  },
+  {
+    "id": "gsxs150",
+    "nama": "Suzuki GSX-S150",
+    "kategori": "Sport",
+    "harga": "Rp 32.620.000",
+    "mesin": "147,3CC",
+    "transmisi": "6-speed, return",
+    "bbm": "41 km/L",
+    "kapasitasTangki": "11,0 L",
+    "berat": "130 kg",
+    "youtube": "https://youtu.be/Yu2oTYX5dZo?si=kYOgPSlpEiNX8Bc_",
+    "warna": [
+      {
+        "id": "black",
+        "hex": "#242424",
+        "img": "../SPESIFIKASI/source/GSXS-HITAM.jpg"
+      },
+      {
+        "id": "blue",
+        "hex": "#0073CE",
+        "img": "../SPESIFIKASI/source/GSXS-BIRU.jpg"
+      }
+    ],
+    "keunggulan": [
+      "Desain Naked Sport Modern",
+      "Petal Disc Brake",
+      "Lamp Ring",
+      "Shutter Key",
+      "Hazard Lamp",
+      "Speedometer LCD digital",
+      "Easy Start System"
+    ]
+  },
+  {
+    "id": "nexcrossover",
+    "nama": "Suzuki Nex Crossover",
+    "kategori": "Skuter",
+    "harga": "Rp 21.565.000",
+    "mesin": "110cc, Air-Cooled",
+    "transmisi": "Automatic CVT",
+    "bbm": "44 km/L",
+    "kapasitasTangki": "3,6 L",
+    "berat": "114 kg",
+    "youtube": "https://youtu.be/KIPYIgodEYA?si=AAOS4vT6vYvBJG8q",
+    "warna": [
+      {
+        "id": "red",
+        "hex": "#E30613",
+        "img": "../SPESIFIKASI/source/CrossoverMerah.jpg"
+      },
+      {
+        "id": "black",
+        "hex": "#222222",
+        "img": "../SPESIFIKASI/source/CrossoverHitam.jpg"
+      },
+      {
+        "id": "blue",
+        "hex": "#1060A3",
+        "img": "../SPESIFIKASI/source/CrossoverBiru.jpg"
+      }
+    ],
+    "keunggulan": [
+      "Menggunakan Naked Handle Bar yang Sporty",
+      "Menggunakan digital speedometer",
+      "Pijakan kaki yang luas",
+      "Easy Start System",
+      "Menggunakan rem cakram pada bagian depan",
+      "Suspensi Nyaman",
+      "Mesin Suzuki Eco Performance (SEP) yang Irit dan Responsif"
+    ]
+  },
+  {
+    "id": "nexiistandart",
+    "nama": "Suzuki Nex II Standart",
+    "kategori": "Skuter",
+    "harga": "Rp 20.800.000",
+    "mesin": "110cc, Air-Cooled",
+    "transmisi": "Automatic CVT",
+    "bbm": "44 km/L",
+    "kapasitasTangki": "3,6 L",
+    "berat": "112 kg",
+    "youtube": "https://youtu.be/Pf4gJOlgc8s?si=B5dv17I3afQxfvM7",
+    "warna": [
+      {
+        "id": "grey",
+        "hex": "#35475B",
+        "img": "../SPESIFIKASI/source/NexStandart-Grey.jpg"
+      },
+      {
+        "id": "blue",
+        "hex": "#346FBC",
+        "img": "../SPESIFIKASI/source/NexStandart-Blue.jpg"
+      },
+      {
+        "id": "black",
+        "hex": "#000000",
+        "img": "../SPESIFIKASI/source/NexStandart-Hitam.jpg"
+      }
+    ],
+    "keunggulan": [
+      "Easy Start System",
+      "Kompartemen Penyimpanan Praktis",
+      "Suzuki Eco Performance (SEP) yang memberikan efisiensi bahan bakar"
+    ]
+  },
+  {
+    "id": "satriapro",
+    "nama": "Suzuki Satria Pro",
+    "kategori": "Sport",
+    "harga": "Rp 35.200.000",
+    "mesin": "150cc, Air-Cooled",
+    "transmisi": "Manual 5-Speed",
+    "bbm": "42 km/L",
+    "kapasitasTangki": "4,0 L",
+    "berat": "112 kg",
+    "youtube": "https://youtu.be/FkfkAA6lI4c?si=ltthTbfERqmEshv2=",
+    "warna": [
+      {
+        "id": "red",
+        "hex": "#A11B2C",
+        "img": "../SPESIFIKASI/source/SatriaProMerah.png"
+      },
+      {
+        "id": "blue",
+        "hex": "#216BE3",
+        "img": "../SPESIFIKASI/source/SatriaProBiru.jpg"
+      },
+      {
+        "id": "white",
+        "hex": "#ffffff",
+        "img": "../SPESIFIKASI/source/SatriaProPutih.jpg"
+      }
+    ],
+    "keunggulan": [
+      "Teknologi Keyless Modern",
+      "Suzuki Ride Connect",
+      "Fitur ABS (Anti-lock Braking System)",
+      "Dilengkapi USB Outlet",
+      "Suzuki Clutch Assist System (kopling lebih halus)",
+      "Menggunakan Digital Speedometer"
+    ]
+  },
+  {
+    "id": "vstrom250sx",
+    "nama": "Suzuki VStrom 250 SX",
+    "kategori": "Adventure",
+    "harga": "Rp 60.848.000",
+    "mesin": "250cc",
+    "transmisi": "6 Speed, MT",
+    "bbm": "31 km/L",
+    "kapasitasTangki": "12,0 L",
+    "berat": "167 kg",
+    "youtube": "https://youtu.be/pLzdsPAC2fc?si=RI6aqEDHrrpZkZKQ",
+    "warna": [
+      {
+        "id": "yellow",
+        "hex": "#FFD000",
+        "img": "../SPESIFIKASI/source/VstromKuning.jpg"
+      },
+      {
+        "id": "blue",
+        "hex": "#216BE3",
+        "img": "../SPESIFIKASI/source/VstromBiru.jpg"
+      },
+      {
+        "id": "black",
+        "hex": "#2B2B2B",
+        "img": "../SPESIFIKASI/source/VstromHitam.jpg"
+      },
+      {
+        "id": "white",
+        "hex": "#FFFFFF",
+        "img": "../SPESIFIKASI/source/VstromPutih.jpg"
+      }
+    ],
+    "keunggulan": [
+      "Knuckle Covers memberikan perlindungan ekstra pada tangan",
+      "Ground clearance mencapai 205 mm",
+      "Cocok untuk touring",
+      "Engine Under Cowling",
+      "USB Outlet untuk mengisi daya smartphone",
+      "LED Highlight"
+    ]
+  }
+]

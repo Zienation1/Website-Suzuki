@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bandingkan Motor Suzuki</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue: #003399;
+      --text: #0A0A0A;
+      --muted: #717182;
+      --surface: #ffffff;
+      --surface-soft: #f3f3f5;
+      --surface-strong: #f7f8fa;
+      --border: rgba(0, 51, 153, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100%;
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--surface-strong);
+      color: var(--text);
+    }
+
+    .page {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding: 24px 0 40px;
+    }
+
+    .container {
+      width: min(1143px, 100%);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      padding: 0 12px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 24px;
+      background: var(--surface);
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      box-shadow: 0 24px 50px rgba(0, 0, 0, 0.08);
+    }
+
+    .logo img {
+      width: 185px;
+      height: auto;
+      display: block;
+    }
+
+    .nav-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .nav-pill {
+      height: 36px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--blue);
+      background: var(--surface);
+      border: 1px solid var(--blue);
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .nav-pill:hover {
+      background: #eef2ff;
+      transform: translateY(-1px);
+    }
+
+    .nav-pill.active {
+      background: var(--blue);
+      color: #ffffff;
+      border-color: var(--blue);
+    }
+    
+    .nav-pill.active:hover {
+      background: #002266;
+    }
+
+    .content-card {
+      background: var(--surface);
+      border: 1px solid var(--blue);
+      border-radius: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      padding: 32px;
+      box-shadow: 0 12px 40px rgba(0, 51, 153, 0.05);
+    }
+
+    .page-title {
+      margin: 0;
+      font-size: clamp(32px, 3vw, 42px);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: 0.4px;
+      color: var(--blue);
+    }
+
+    .page-subtitle {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 24px;
+      max-width: 780px;
+    }
+
+    .compare-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      width: 100%;
+    }
+
+    .compare-card {
+      background: var(--surface);
+      border-radius: 20px;
+      border: 1px solid var(--blue);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .compare-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(0, 51, 153, 0.08);
+    }
+
+    .compare-card h2 {
+      margin: 0;
+      color: var(--text);
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 28px;
+    }
+
+    .compare-card p {
+      margin: 4px 0 0;
+      color: var(--blue);
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+    }
+
+    .select-field {
+      width: 100%;
+      min-height: 44px;
+      padding: 12px 16px;
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 51, 153, 0.12);
+      background: var(--surface-soft);
+      appearance: none;
+      outline: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .select-field:hover {
+      border-color: rgba(0, 51, 153, 0.3);
+    }
+
+    .select-field:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 4px rgba(0, 51, 153, 0.1);
+      background: var(--surface);
+    }
+
+    .select-wrapper {
+      position: relative;
+    }
+
+    .select-wrapper::after {
+      content: ''; 
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px; 
+      height: 16px; 
+      background-image: url('Icon-1.svg'); 
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      pointer-events: none;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .empty-state {
+      background: var(--blue);
+      color: #ffffff;
+      border-radius: 20px;
+      padding: 64px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      text-align: center;
+      width: 100%;
+      animation: fadeUp 0.6s ease-out;
+    }
+
+    .empty-state p {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .empty-state.hidden {
+      display: none !important;
+    }
+
+    @keyframes popIn {
+      0% { opacity: 0; transform: scale(0.95) translateY(20px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .comparison-box {
+      background: var(--surface);
+      border-radius: 20px;
+      border: 1px solid var(--blue);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .comparison-box.hidden {
+      display: none !important;
+    }
+
+    .comparison-box h3 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .card-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .motor-card {
+      background: var(--surface);
+      border-radius: 20px;
+      border: 1px solid rgba(0, 51, 153, 0.12);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px; /* Diperkecil dari 24px agar struktur vertikal lebih rapat */
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .motor-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 24px 48px rgba(0, 51, 153, 0.08);
+      border-color: rgba(0, 51, 153, 0.3);
+    }
+
+    .motor-image {
+      width: 100%;
+      height: 280px;
+      border-radius: 16px;
+      background: #ececf0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      overflow: hidden; 
+    }
+
+    .motor-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: none;
+      transform: scale(1.15); 
+      mix-blend-mode: multiply; 
+      transition: transform 0.3s ease-in-out; 
+    }
+    
+    .motor-card:hover .motor-image img {
+      transform: scale(1.23); 
+    }
+
+    .motor-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .motor-name {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    /* Cari class .badge lama Anda, lalu ganti/lengkapi menjadi seperti ini: */
+.badge {
+  display: inline-flex;
+  align-items: center;      /* Membuat teks center secara vertikal */
+  justify-content: center;   /* Membuat teks center secara horizontal */
+  height: 28px;
+  padding: 0 12px;
+  border-radius: 8px;
+  background: var(--blue);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  line-height: 1;            /* Tambahkan ini untuk mereset jarak baris bawaan teks */
+}
+
+    .price {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 700;
+      color: #030213;
+      line-height: 1.2;
+    }
+
+    .spec-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 16px;
+    }
+
+    .spec-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: center;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .spec-label {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 20px;
+    }
+
+    .spec-value {
+      color: var(--text);
+      font-size: 16px;
+      font-weight: 500;
+      text-align: right;
+    }
+
+    .feature-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      color: var(--text);
+      font-size: 14px;
+      line-height: 20px;
+      list-style: none;
+    }
+
+    .feature-list li::before {
+      content: '';
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #00A63E;
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    .footer-card {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 24px;
+      background: var(--surface);
+      border-radius: 24px;
+      border: 1px solid rgba(0, 51, 153, 0.12);
+      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.08);
+      padding: 32px;
+    }
+
+    .footer-logo {
+      width: 140px;
+      height: auto;
+      display: block;
+      margin-bottom: 18px;
+    }
+
+    .footer-info {
+      color: #003399;
+      font-size: 14px;
+      line-height: 1.8;
+      font-weight: 400;
+    }
+
+    .footer-column {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-column h4 {
+      margin: 0 0 12px;
+      color: #003399;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .footer-column p {
+      margin: 8px 0 0;
+      color: #003399;
+      font-size: 14px;
+      line-height: 1.8;
+      font-weight: 400;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+    
+    .footer-column p:hover {
+      color: #001f5a;
+      text-decoration: underline;
+    }
+
+    .footer-bottom {
+      padding-top: 24px;
+      border-top: 1px rgba(0, 51, 153, 0.15) solid;
+      text-align: center;
+      color: rgba(0, 51, 153, 0.88);
+      font-size: 14px;
+    }
+
+    @media (max-width: 980px) {
+      .topbar, .compare-grid, .card-row, .footer-card {
+        grid-template-columns: 1fr;
+      }
+      .topbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav-group {
+        width: 100%;
+      }
+      .nav-pill {
+        flex: 1 1 calc(50% - 12px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="container">
+      <header class="topbar">
+        <div class="logo"><img src="image 2.png" alt="Suzuki logo"></div>
+        <div class="nav-group">
+          <a class="nav-pill" href="../BERANDA/index_beranda.html">
+            <img src="Icon-5.svg" alt="Beranda" width="18" height="18" />Beranda
+          </a>
+          <a class="nav-pill" href="../KATALOG/katalog.html">
+            <img src="Icon-4.svg" alt="Katalog Motor" width="18" height="18" />Katalog Motor
+          </a>
+          <a class="nav-pill active" href="index_bm.html">
+            <img src="Icon-3.svg" alt="Bandingkan Motor" width="18" height="18" />Bandingkan Motor
+          </a>
+        </div>
+      </header>
+
+      <section class="content-card">
+        <div>
+          <h1 class="page-title">Bandingkan Motor Suzuki</h1>
+          <p class="page-subtitle">Pilih dua motor untuk membandingkan spesifikasi dan fitur secara detail</p>
+        </div>
+
+        <div class="compare-grid">
+          <article class="compare-card">
+            <div>
+              <h2>Motor 1</h2>
+              <p>Pilih motor pertama untuk dibandingkan</p>
+            </div>
+            <div class="select-wrapper">
+              <select id="motor1" class="select-field" onchange="updateCompare()">
+                <option value="" disabled selected>Pilih motor...</option>
+              </select>
+            </div>
+          </article>
+
+          <article class="compare-card">
+            <div>
+              <h2>Motor 2</h2>
+              <p>Pilih motor kedua untuk dibandingkan</p>
+            </div>
+            <div class="select-wrapper">
+              <select id="motor2" class="select-field" onchange="updateCompare()">
+                <option value="" disabled selected>Pilih motor...</option>
+              </select>
+            </div>
+          </article>
+        </div>
+
+        <div class="empty-state" id="emptyState">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+          <p>Pilih dua motor di atas untuk melihat perbandingan detail</p>
+        </div>
+
+        <div class="comparison-box hidden" id="comparisonBox">
+          <h3>Perbandingan Detail</h3>
+          <div class="card-row">
+            <article class="motor-card" id="card1">
+              <div class="motor-image">
+                <img id="img1" src="" alt="Motor 1" />
+              </div>
+              <div class="motor-top">
+                <h2 class="motor-name" id="name1">-</h2>
+                <span class="badge" id="badge1">-</span>
+              </div>
+              <p class="price" id="price1">-</p>
+              <ul class="spec-list">
+                <li class="spec-item"><span class="spec-label">Kapasitas Mesin</span><span class="spec-value" id="engine1">-</span></li>
+                <li class="spec-item"><span class="spec-label">Transmisi</span><span class="spec-value" id="transmission1">-</span></li>
+                <li class="spec-item"><span class="spec-label">Konsumsi BBM</span><span class="spec-value" id="fuel1">-</span></li>
+                <li class="spec-item"><span class="spec-label">Berat Motor</span><span class="spec-value" id="weight1">-</span></li>
+              </ul>
+              <div>
+                <p style="font-size: 16px; margin: 12px 0 16px; font-weight: 600;">Fitur Unggulan</p>
+                <ul class="feature-list" id="features1"></ul>
+              </div>
+            </article>
+
+            <article class="motor-card" id="card2">
+              <div class="motor-image">
+                <img id="img2" src="" alt="Motor 2" />
+              </div>
+              <div class="motor-top">
+                <h2 class="motor-name" id="name2">-</h2>
+                <span class="badge" id="badge2">-</span>
+              </div>
+              <p class="price" id="price2">-</p>
+              <ul class="spec-list">
+                <li class="spec-item"><span class="spec-label">Kapasitas Mesin</span><span class="spec-value" id="engine2">-</span></li>
+                <li class="spec-item"><span class="spec-label">Transmisi</span><span class="spec-value" id="transmission2">-</span></li>
+                <li class="spec-item"><span class="spec-label">Konsumsi BBM</span><span class="spec-value" id="fuel2">-</span></li>
+                <li class="spec-item"><span class="spec-label">Berat Motor</span><span class="spec-value" id="weight2">-</span></li>
+              </ul>
+              <div>
+                <p style="font-size: 16px; margin: 12px 0 16px; font-weight: 600;">Fitur Unggulan</p>
+                <ul class="feature-list" id="features2"></ul>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer-card">
+        <div>
+          <img src="image 3.png" alt="Suzuki logo" class="footer-logo">
+          <div class="footer-info">Platform informasi terlengkap untuk motor Suzuki Indonesia</div>
+        </div>
+        <div class="footer-column">
+          <h4>Produk</h4>
+          <p onclick="window.location.href='../KATALOG/katalog.html?kategori=Sport'">Sport</p>
+          <p onclick="window.location.href='../KATALOG/katalog.html?kategori=Matic'">Matic</p>
+          <p onclick="window.location.href='../KATALOG/katalog.html?kategori=Adventure'">Adventure</p>
+        </div>
+        <div class="footer-column">
+          <h4>Kontak</h4>
+          <p onclick="window.open('https://wa.me/082299318387', '_blank')">WhatsApp Sales</p>
+          <p onclick="window.location.href='mailto:halo@suzuki.co.id'">Email Support</p>
+          <p onclick="window.open('https://www.google.com/maps/search/Dealer+Suzuki+Motor+Terdekat', '_blank')">Lokasi Dealer</p>
+        </div>
+        <div class="footer-column">
+          <h4>Lainnya</h4>
+          <a href="../ADMIN/index Admin.html" style="display: inline-block; margin-top: 8px; color: #003399; text-decoration: none; font-size: 14px; cursor: pointer; transition: color 0.2s ease;" onmouseover="this.style.textDecoration='underline'; this.style.color='#001f5a';" onmouseout="this.style.textDecoration='none'; this.style.color='#003399';">
+            Admin
+          </a>
+        </div>
+      </footer>
+      <div class="footer-bottom">© 2026 Suzuki Motorcycle Indonesia. Semua hak dilindungi.</div>
+    </div>
+  </div>
+
+  <script>
+    let dataKatalog = [];
+
+    async function loadDataMotor() {
+      try {
+        const response = await fetch('/api/motors');
+        if (!response.ok) throw new Error("Gagal mengambil data dari database server");
+        
+        const resData = await response.json();
+        dataKatalog = resData.motors; 
+        
+        populateDropdowns();
+      } catch (error) {
+        console.error("Gagal mengambil data API:", error);
+        alert("Gagal memuat daftar motor dari database server.");
+      }
+    }
+
+    function populateDropdowns() {
+      const select1 = document.getElementById('motor1');
+      const select2 = document.getElementById('motor2');
+
+      select1.innerHTML = '<option value="" disabled selected>Pilih motor...</option>';
+      select2.innerHTML = '<option value="" disabled selected>Pilih motor...</option>';
+
+      dataKatalog.forEach(motor => {
+        const namaMotor = motor.nama_motor || motor.nama;
+        const optionHTML = `<option value="${motor.id}">${namaMotor}</option>`;
+        select1.innerHTML += optionHTML;
+        select2.innerHTML += optionHTML;
+      });
+    }
+
+    function setListItems(containerId, keunggulanData) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = '';
+      if (!keunggulanData) {
+        container.innerHTML = '<li>Fitur standar Suzuki</li>';
+        return;
+      }
+      
+      let itemsArray = [];
+      if (Array.isArray(keunggulanData)) {
+        itemsArray = keunggulanData;
+      } else if (typeof keunggulanData === 'string') {
+        itemsArray = keunggulanData.split(/,|\n|;/).map(item => item.trim()).filter(item => item.length > 0);
+      }
+
+      itemsArray.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        container.appendChild(li);
+      });
+    }
+
+    function updateCompare() {
+      const motor1Value = document.getElementById('motor1').value;
+      const motor2Value = document.getElementById('motor2').value;
+      const comparisonBox = document.getElementById('comparisonBox');
+      const emptyState = document.getElementById('emptyState');
+
+      if (!motor1Value || !motor2Value) {
+        comparisonBox.classList.add('hidden');
+        emptyState.classList.remove('hidden');
+        return;
+      }
+
+      comparisonBox.style.animation = 'none';
+      comparisonBox.offsetHeight; 
+      comparisonBox.style.animation = null;
+
+      comparisonBox.classList.remove('hidden');
+      emptyState.classList.add('hidden');
+
+      const motor1 = dataKatalog.find(m => m.id == motor1Value);
+      const motor2 = dataKatalog.find(m => m.id == motor2Value);
+
+      // --- UPDATE TAMPILAN MOTOR 1 ---
+      const namaM1 = motor1.nama_motor || motor1.nama;
+      const hargaM1 = parseInt(motor1.harga) || 0;
+      const gambarM1 = motor1.gambar_motor || motor1.gambar || 'Burgman.png';
+
+      document.getElementById('name1').textContent = namaM1;
+      document.getElementById('badge1').textContent = motor1.tipe || 'Suzuki';
+      document.getElementById('price1').textContent = `Rp ${hargaM1.toLocaleString('id-ID')}`;
+      document.getElementById('engine1').textContent = motor1.mesin || motor1.kapasitas_mesin || '-';
+      document.getElementById('transmission1').textContent = motor1.transmisi || '-';
+      document.getElementById('fuel1').textContent = motor1.bbm || motor1.konsumsi_bbm || '-';
+      document.getElementById('weight1').textContent = motor1.berat || motor1.berat_motor || '-';
+      setListItems('features1', motor1.keunggulan || motor1.deskripsi);
+      
+      const img1 = document.getElementById('img1');
+      img1.src = `../KATALOG/source/${gambarM1}`;
+      img1.style.display = 'block';
+      img1.onerror = function() { this.src = '../KATALOG/source/Burgman.png'; };
+
+      // --- UPDATE TAMPILAN MOTOR 2 ---
+      const namaM2 = motor2.nama_motor || motor2.nama;
+      const hargaM2 = parseInt(motor2.harga) || 0;
+      const gambarM2 = motor2.gambar_motor || motor2.gambar || 'Burgman.png';
+
+      document.getElementById('name2').textContent = namaM2;
+      document.getElementById('badge2').textContent = motor2.tipe || 'Suzuki';
+      document.getElementById('price2').textContent = `Rp ${hargaM2.toLocaleString('id-ID')}`;
+      document.getElementById('engine2').textContent = motor2.mesin || motor2.kapasitas_mesin || '-';
+      document.getElementById('transmission2').textContent = motor2.transmisi || '-';
+      document.getElementById('fuel2').textContent = motor2.bbm || motor2.konsumsi_bbm || '-';
+      document.getElementById('weight2').textContent = motor2.berat || motor2.berat_motor || '-';
+      setListItems('features2', motor2.keunggulan || motor2.deskripsi);
+
+      const img2 = document.getElementById('img2');
+      img2.src = `../KATALOG/source/${gambarM2}`;
+      img2.style.display = 'block';
+      img2.onerror = function() { this.src = '../KATALOG/source/Burgman.png'; };
+    }
+
+    window.onload = loadDataMotor;
+  </script>
+</body>
+</html>
