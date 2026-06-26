@@ -52,6 +52,7 @@ app.post('/api/login', (req, res) => {
 // 2. API Mengambil Semua Data Motor & Summary Dashboard (DENGAN VARIAN)
 app.get('/api/motors', (req, res) => {
     const sqlMotors = "SELECT * FROM motors";
+    const sqlVariants = "SELECT * FROM motor_variants";
     const sqlSummary = `
         SELECT 
             COUNT(id) AS total_motor, 
@@ -60,25 +61,33 @@ app.get('/api/motors', (req, res) => {
         FROM motors
     `;
 
-    db.query(sqlMotors, async (err, motorsResult) => {
+    db.query(sqlMotors, (err, motorsResult) => {
         if (err) return res.status(500).json({ error: err.message });
 
-        // Loop untuk mengambil data varian dari tabel motor_variants untuk setiap motor
-        for (let motor of motorsResult) {
-            motor.variants = await new Promise((resolve) => {
-                db.query("SELECT * FROM motor_variants WHERE motor_id = ?", [motor.id], (err, results) => {
-                    resolve(err ? [] : results);
-                });
-            });
-        }
-
-        db.query(sqlSummary, (err, summaryResult) => {
+        db.query(sqlVariants, (err, variantsResult) => {
             if (err) return res.status(500).json({ error: err.message });
 
-            // Mengirim data gabungan (motors + variants + summary)
-            res.json({
-                motors: motorsResult,
-                summary: summaryResult[0]
+            // Petakan varian ke motor masing-masing di memori (in-memory mapping)
+            const variantsMap = {};
+            variantsResult.forEach(variant => {
+                if (!variantsMap[variant.motor_id]) {
+                    variantsMap[variant.motor_id] = [];
+                }
+                variantsMap[variant.motor_id].push(variant);
+            });
+
+            motorsResult.forEach(motor => {
+                motor.variants = variantsMap[motor.id] || [];
+            });
+
+            db.query(sqlSummary, (err, summaryResult) => {
+                if (err) return res.status(500).json({ error: err.message });
+
+                // Mengirim data gabungan (motors + variants + summary)
+                res.json({
+                    motors: motorsResult,
+                    summary: summaryResult[0]
+                });
             });
         });
     });
