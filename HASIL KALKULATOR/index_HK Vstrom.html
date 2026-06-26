@@ -409,7 +409,7 @@
                 <p class="result-card__value" id="monthlyPayment">Rp 0</p>
                 <p class="result-card__meta" id="resultNote">Cicilan selama 36 bulan</p>
                 
-                <a href="#" id="whatsappBtn" class="cta-sales-btn" target="_blank">
+                <a href="#" id="waSalesBtn" class="cta-sales-btn" target="_blank">
                   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.455L0 24zm6.59-4.846c1.62.962 3.21 1.453 4.857 1.455 5.4 0 9.794-4.364 9.797-9.727.002-2.597-1.012-5.04-2.859-6.884C16.544 2.152 14.105 1.139 11.51 1.14c-5.41 0-9.813 4.368-9.817 9.73-.002 2.067.55 4.08 1.597 5.86l-.99 3.61 3.733-.967zm12.188-5.32c-.316-.157-1.874-.916-2.162-1.02-.287-.104-.497-.156-.706.157-.21.314-.81.156-.993.365-.182.208-.364.23-.68.073-.316-.157-1.334-.488-2.542-1.555-.94-.83-1.573-1.854-1.757-2.167-.183-.313-.02-.482.137-.638.142-.14.316-.365.474-.547.158-.182.21-.313.316-.522.105-.208.053-.392-.026-.548-.079-.156-.706-1.685-.967-2.31-.254-.607-.514-.526-.706-.536-.183-.01-.392-.012-.6-.012-.208 0-.547.078-.833.39-.286.313-1.097 1.066-1.097 2.6 0 1.535 1.123 3.02 1.28 3.23 1.122 1.515 2.47 2.766 4.154 3.42.396.15.792.24 1.192.31.404.07.77.03 1.06-.013.322-.047 1.873-.758 2.137-1.492.263-.733.263-1.36.184-1.492-.078-.13-.286-.208-.603-.365z"/>
                   </svg>
@@ -430,7 +430,7 @@
       const resultCard = document.getElementById('resultCard');
       const monthlyPayment = document.getElementById('monthlyPayment');
       const resultNote = document.getElementById('resultNote');
-      const whatsappBtn = document.getElementById('whatsappBtn');
+      const waSalesBtn = document.getElementById('waSalesBtn');
 
       function formatRupiah(value) {
         return "Rp " + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
