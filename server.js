@@ -19,20 +19,15 @@ app.get('/', (req, res) => {
     res.redirect('/BERANDA/index_beranda.html');
 });
 
-// Koneksi ke Database MySQL
-const db = mysql.createConnection({
+// Koneksi ke Database MySQL (Menggunakan Connection Pool)
+const db = mysql.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME
-});
-
-db.connect((err) => {
-    if (err) {
-        console.error('Koneksi ke database gagal: ' + err.stack);
-        return;
-    }
-    console.log('Berhasil terhubung ke Database');
+    database: process.env.DB_NAME,
+    waitForConnections: true,
+    connectionLimit: 5,
+    queueLimit: 0
 });
 
 // ==================== ENDPOINT API ====================
