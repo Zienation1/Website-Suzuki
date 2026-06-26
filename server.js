@@ -26,7 +26,8 @@ const db = mysql.createPool({
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
     waitForConnections: true,
-    connectionLimit: 2,
+    connectionLimit: 1,
+    idleTimeout: 1000, // Tutup koneksi yang menganggur setelah 1 detik
     queueLimit: 0
 });
 
