@@ -200,13 +200,7 @@
         const username = document.getElementById('username').value.trim();
         const password = document.getElementById('password').value;
 
-        // Validasi Sisi Frontend (Wajib adminsuzuki & suzuki123)
-        if (username !== "adminsuzuki" || password !== "suzuki123") {
-            alert('Login Gagal: Username atau Password salah!');
-            return; // Hentikan proses jika tidak sesuai
-        }
-
-        // Jika lolos validasi lokal, kirim ke Backend API
+        // Kirim ke Backend API untuk verifikasi database
         fetch('/api/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
