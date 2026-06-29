@@ -3,25 +3,55 @@
   "builds": [
     {
       "src": "server.js",
-      "use": "@vercel/node",
-      "config": {
-        "includeFiles": [
-          "BERANDA/**",
-          "KATALOG/**",
-          "ADMIN/**",
-          "BANDING MOTOR/**",
-          "BERANDA ADMIN/**",
-          "DATA/**",
-          "EDIT BERANDA ADMIN/**",
-          "HASIL KALKULATOR/**"
-        ]
-      }
+      "use": "@vercel/node"
+    },
+    {
+      "src": "BERANDA/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "KATALOG/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "ADMIN/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "BANDING MOTOR/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "BERANDA ADMIN/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "DATA/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "EDIT BERANDA ADMIN/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "HASIL KALKULATOR/**",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
-      "src": "/(.*)",
+      "src": "/api/(.*)",
       "dest": "server.js"
+    },
+    {
+      "src": "/$",
+      "status": 302,
+      "headers": {
+        "Location": "/BERANDA/index_beranda.html"
+      }
+    },
+    {
+      "handle": "filesystem"
     }
   ]
 }
